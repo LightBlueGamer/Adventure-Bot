@@ -4,7 +4,8 @@
     "description": "A simple discord RPG bot",
     "main": "src/Bot/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "fix": "npx eslint --fix",
+        "format": "npx prettier --write src"
     },
     "repository": {
         "type": "git",
@@ -35,5 +36,9 @@
         "enmap": "^5.8.7",
         "express": "^4.17.1",
         "pretty-ms": "^7.0.1"
+    },
+    "devDependencies": {
+        "eslint": "^7.32.0",
+        "prettier": "^2.4.0"
     }
 }

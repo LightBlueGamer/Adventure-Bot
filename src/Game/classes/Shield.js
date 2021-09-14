@@ -1,6 +1,7 @@
 const Item = require("./Item");
 module.exports = class Shield extends Item {
     constructor(name, description, subClass, recipe, shop, space) {
+        super(name, description, "SHIELD", recipe, shop, space);
         this.shield = {
             blocking: {
                 chance: 0,
@@ -8,6 +9,5 @@ module.exports = class Shield extends Item {
                 blockPer: 0,
             },
         };
-        super(name, description, "SHIELD", recipe, shop, space);
     }
 };

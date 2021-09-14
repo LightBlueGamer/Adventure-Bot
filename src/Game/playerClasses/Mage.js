@@ -1,4 +1,4 @@
-const Class = require("../baseClasses/Class");
+const Class = require("../classes/Class");
 
 module.exports = new Class(
     "Mage",

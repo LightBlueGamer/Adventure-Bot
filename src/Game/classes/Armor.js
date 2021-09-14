@@ -1,6 +1,7 @@
 const Item = require("./Item");
 module.exports = class Armor extends Item {
     constructor(name, description, subClass, recipe, shop, space) {
+        super(name, description, "ARMOR", recipe, shop, space);
         this.armor = {
             slot: "",
             defenseAbs: 0,
@@ -14,6 +15,5 @@ module.exports = class Armor extends Item {
                 mana: 0,
             },
         };
-        super(name, description, "ARMOR", recipe, shop, space);
     }
 };
