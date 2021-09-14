@@ -1,4 +1,3 @@
 node_modules
 src/Bot/config.json
 src/Bot/.env
-.prettierrc.json
