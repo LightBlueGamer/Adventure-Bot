@@ -1,20 +1,28 @@
 # Table of contents
 
 * [Adventure Bot](README.md)
-* [Home](untitled/README.md)
-  * [Home](untitled/home.md)
-  * [Armor](untitled/armor.md)
-  * [Class](untitled/class.md)
-  * [Item](untitled/item.md)
-  * [Loot](untitled/loot.md)
-  * [Material](untitled/material.md)
-  * [Weapon](untitled/weapon.md)
-  * [Shield](untitled/shield.md)
-  * [Armor.js](untitled/armor.js.md)
-  * [Class.js](untitled/class.js.md)
-  * [Item.js](untitled/item.js.md)
-  * [Loot.js](untitled/loot.js.md)
-  * [Weapon.js](untitled/weapon.js.md)
-  * [Material.js](untitled/material.js.md)
-  * [Shield.js](untitled/shield.js.md)
+
+## Classes
+
+---
+
+* [Home](home/README.md)
+  * [Mage](home/mage.md)
+  * [Home](home/home.md)
+  * [Paladin](home/paladin.md)
+  * [Armor](home/armor.md)
+  * [Warrior](home/warrior.md)
+  * [Class](home/class.md)
+  * [Item](home/item.md)
+  * [Loot](home/loot.md)
+  * [Material](home/material.md)
+  * [Weapon](home/weapon.md)
+  * [Shield](home/shield.md)
+  * [Armor.js](home/armor.js.md)
+  * [Class.js](home/class.js.md)
+  * [Item.js](home/item.js.md)
+  * [Loot.js](home/loot.js.md)
+  * [Weapon.js](home/weapon.js.md)
+  * [Material.js](home/material.js.md)
+  * [Shield.js](home/shield.js.md)
 
