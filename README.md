@@ -1,3 +1,2 @@
-# Adventure Bot
+# Initial page
 
-A simple Discord adventure bot
