@@ -36,5 +36,8 @@
         "enmap": "^5.8.7",
         "express": "^4.17.1",
         "pretty-ms": "^7.0.1"
+    },
+    "devDependencies": {
+        "@discordjs/docgen": "^0.10.0"
     }
 }
