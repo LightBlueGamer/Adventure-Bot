@@ -1,0 +1,8 @@
+name: GitHub Actions
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    steps:
+      - name: JSDoc Action
+        uses: andstor/jsdoc-action@v1.2.0
+
