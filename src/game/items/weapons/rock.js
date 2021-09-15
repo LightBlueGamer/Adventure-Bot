@@ -1,4 +1,4 @@
-const Weapon = require("../../BaseClasses/Weapon");
+const Weapon = require("../../classes/Weapon");
 
 module.exports = class Rock extends Weapon {
     constructor() {
