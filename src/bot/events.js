@@ -1,4 +1,7 @@
-const { client } = require("./index").on("createPlayer", function (user) {
+const EventEmitter = require("events");
+const { client } = require("./index");
+
+client.on("createPlayer", function (user) {
     client.players.ensure(user.id, {
         name: user.username,
         level: 1,

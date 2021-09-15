@@ -4,8 +4,7 @@
     "description": "A simple discord RPG bot",
     "main": "src/Bot/index.js",
     "scripts": {
-        "docs": "docgen --source src --custom docs/index.yml --output docs/docs.json",
-        "docs:test": "docgen --source src --custom docs/index.yml"
+        "docs": "npx jsdoc -c .jsdoc.conf.json"
     },
     "repository": {
         "type": "git",
@@ -26,18 +25,21 @@
     "homepage": "https://github.com/LightBlueGamer/Adventure-Bot#readme",
     "dependencies": {
         "@discordjs/builders": "^0.6.0",
+        "@discordjs/docgen": "^0.10.0",
         "@discordjs/rest": "^0.1.0-canary.0",
         "apidoc": "^0.29.0",
         "better-sqlite3": "^7.4.3",
+        "clean-jsdoc-theme": "^3.2.8",
         "dash-apidoc-template": "^1.0.0",
         "discord-api-types": "^0.22.0",
         "discord.js": "^13.1.0",
+        "docdash": "^1.2.0",
         "dotenv": "^10.0.0",
         "enmap": "^5.8.7",
         "express": "^4.17.1",
         "pretty-ms": "^7.0.1"
     },
     "devDependencies": {
-        "@discordjs/docgen": "^0.10.0"
+        "jsdoc": "^3.6.7"
     }
 }

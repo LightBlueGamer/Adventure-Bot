@@ -1,3 +1,11 @@
+/**
+ * The base class of Classes.
+ * @class Class
+ * @param {Object} options The options to create the item with
+ * @param {string} options.name The name of the item
+ * @param {string} options.description The description of the item
+ * @param {object} options.attributes The attributes of the class
+ */
 module.exports = class Class {
     constructor(options) {
         const { name, description, attributes } = options;
