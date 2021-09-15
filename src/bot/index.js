@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { Client, Intents, Collection } = require("discord.js");
-require("dotenv").config();
 const Enmap = require("enmap");
+require("dotenv").config();
 
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -10,11 +10,13 @@ module.exports = { client };
 
 client.events = new Collection();
 client.commands = new Collection();
+client.classes = new Collection();
+client.items = new Collection();
 
-client.players = new Enmap();
+client.players = new Enmap({ name: "players" });
 
-const eventFiles = fs.readdirSync("./events").filter((file) => file.endsWith(".js"));
-const commandFiles = fs.readdirSync("./commands").filter((file) => file.endsWith(".js"));
+const eventFiles = fs.readdirSync("./src/bot/events").filter((file) => file.endsWith(".js"));
+const commandFiles = fs.readdirSync("./src/bot/commands").filter((file) => file.endsWith(".js"));
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);

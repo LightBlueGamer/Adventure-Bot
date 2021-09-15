@@ -4,3 +4,4 @@ src/bot/.env
 docs/docs.json
 data/
 jsdoc.js
+.env

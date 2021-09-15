@@ -2,9 +2,10 @@
     "name": "adventure-bot",
     "version": "2.0.0",
     "description": "A simple discord RPG bot",
-    "main": "src/Bot/index.js",
+    "main": "src/bot/index.js",
     "scripts": {
-        "docs": "npx jsdoc -c .jsdoc.conf.json"
+        "dev": "nodemon src/api/server.js",
+        "apidoc": "npx apidoc -i src/api -o docs -t node_modules/dash-apidoc-template/template -c apidoc.json"
     },
     "repository": {
         "type": "git",
@@ -29,17 +30,16 @@
         "@discordjs/rest": "^0.1.0-canary.0",
         "apidoc": "^0.29.0",
         "better-sqlite3": "^7.4.3",
-        "clean-jsdoc-theme": "^3.2.8",
         "dash-apidoc-template": "^1.0.0",
         "discord-api-types": "^0.22.0",
         "discord.js": "^13.1.0",
-        "docdash": "^1.2.0",
         "dotenv": "^10.0.0",
         "enmap": "^5.8.7",
         "express": "^4.17.1",
         "pretty-ms": "^7.0.1"
     },
     "devDependencies": {
-        "jsdoc": "^3.6.7"
+        "jsdoc": "^3.6.7",
+        "nodemon": "^2.0.12"
     }
 }
