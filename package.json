@@ -4,7 +4,6 @@
     "description": "A simple discord RPG bot",
     "main": "src/Bot/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "docs": "docgen --source src --custom docs/index.yml --output docs/docs.json",
         "docs:test": "docgen --source src --custom docs/index.yml"
     },
