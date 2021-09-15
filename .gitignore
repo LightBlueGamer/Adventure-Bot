@@ -1,4 +1,4 @@
 node_modules
-src/Bot/config.json
-src/Bot/.env
+src/bot/config.json
+src/bot/.env
 docs/docs.json
