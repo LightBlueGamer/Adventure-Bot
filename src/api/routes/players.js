@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { client } = require("../../bot/index");
+const { client } = require("../../bot");
 
 /**
  * @api {get} /api/players Get JSON data of players

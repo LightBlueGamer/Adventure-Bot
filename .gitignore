@@ -5,3 +5,5 @@ docs/docs.json
 data/
 jsdoc.js
 .env
+apidoc.json
+logs/

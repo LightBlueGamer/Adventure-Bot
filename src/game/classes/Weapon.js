@@ -4,9 +4,9 @@ module.exports = class Weapon extends Item {
         const { name, description, recipe, shop, space, damage } = options;
         super({ name, description, subClass: "WEAPON", recipe, shop, space });
         this.damage = {
-            type: damage.type ?? "BLUNT",
-            value: damage.value ?? 0,
-            critical: damage.critical ?? 1.2,
+            type: damage?.type ?? "BLUNT",
+            value: damage?.value ?? 0,
+            critical: damage?.critical ?? 1.2,
         };
     }
 };

@@ -1,5 +1,4 @@
-const EventEmitter = require("events");
-const { client } = require("./index");
+const { client } = require(".");
 
 client.on("createPlayer", function (user) {
     client.players.ensure(user.id, {

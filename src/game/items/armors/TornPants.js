@@ -1,6 +1,6 @@
-const Armor = require("../../classes/Weapon");
+const Armor = require("../../classes/Armor");
 
-module.exports = class TornShirt extends Armor {
+module.exports = class TornPants extends Armor {
     constructor() {
         super({
             name: "Torn Pants",
