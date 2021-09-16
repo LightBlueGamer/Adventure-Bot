@@ -7,3 +7,4 @@ jsdoc.js
 .env
 apidoc.json
 logs/
+config.json
