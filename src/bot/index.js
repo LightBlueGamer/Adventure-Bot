@@ -38,4 +38,4 @@ for (const file of eventFiles) {
 }
 console.log("⸻".repeat(50));
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN || "$DISCORD_TOKEN");

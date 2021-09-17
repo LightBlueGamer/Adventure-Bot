@@ -8,3 +8,5 @@ jsdoc.js
 apidoc.json
 logs/
 config.json
+.replit
+replit.nix
