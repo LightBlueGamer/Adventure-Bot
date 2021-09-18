@@ -16,6 +16,10 @@ client.items = new Collection();
 client.players = new Enmap({ name: "players" });
 
 const eventFiles = fs.readdirSync("./src/bot/events").filter((file) => file.endsWith(".js"));
+const customEventFiles = fs
+    .readdirSync("./src/bot/customEvents")
+    .filter((file) => file.endsWith(".js"));
+
 const commandFiles = fs.readdirSync("./src/bot/commands").filter((file) => file.endsWith(".js"));
 
 console.log("COMMANDS:");
@@ -35,6 +39,12 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args));
     }
     console.log(`Loading event: ${event.name}`);
+}
+console.log("⸻".repeat(50));
+console.log("CUSTOM EVENTS:");
+for (const file of customEventFiles) {
+    require(`./customEvents/${file}`);
+    console.log(`Loaded Custom Event: ${file}`);
 }
 console.log("⸻".repeat(50));
 

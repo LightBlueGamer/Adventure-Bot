@@ -1,6 +1,6 @@
-const { client } = require(".");
+const { client } = require("../");
 
-client.on("createPlayer", function (user) {
+client.on("createPlayer", (user) => {
     client.players.ensure(user.id, {
         name: user.username,
         level: 1,

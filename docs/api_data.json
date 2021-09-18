@@ -20,7 +20,7 @@
     },
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/api/items/name"
+        "url": "/api/items/name"
       }
     ],
     "success": {
@@ -60,7 +60,7 @@
     },
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/api/items"
+        "url": "/api/items"
       }
     ],
     "success": {
@@ -82,7 +82,7 @@
   {
     "type": "get",
     "url": "/api/players",
-    "title": "Get JSON data of players",
+    "title": "Get JSON data of non private players",
     "version": "1.0.0",
     "name": "GetPlayers",
     "group": "Players",
@@ -100,7 +100,7 @@
     },
     "sampleRequest": [
       {
-        "url": "http://localhost:3000/api/players"
+        "url": "/api/players"
       }
     ],
     "success": {

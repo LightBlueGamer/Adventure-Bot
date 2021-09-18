@@ -8,3 +8,5 @@ config.json
 replit.nix
 permissions.json
 config.js
+.config/configstore/nodemon.json
+build/
