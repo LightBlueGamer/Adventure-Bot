@@ -1,6 +1,7 @@
 const { client } = require("../");
 
 client.on("createPlayer", (user) => {
+    if (user.bot) return;
     client.players.ensure(user.id, {
         name: user.username,
         level: 1,

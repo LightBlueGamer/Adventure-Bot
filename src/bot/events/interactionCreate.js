@@ -3,7 +3,7 @@ module.exports = {
     name: "interactionCreate",
     once: false,
     async execute(interaction) {
-        client.emit("createPlayer", interaction.user);
+        interaction.client.emit("createPlayer", interaction.user);
         if (
             interaction.isButton() ||
             interaction.isMessageComponent() ||
