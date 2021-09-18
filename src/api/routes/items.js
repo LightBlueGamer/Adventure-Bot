@@ -33,7 +33,7 @@ router.get("/:name", (req, res) => {
     const fixedName = name
         .split("_")
         .map((x) => x.replace(x[0], x[0].toUpperCase()))
-        .join("_");
+        .join(" ");
     if (!client) return res.status(503).json({ message: "Client unavailable" });
     return res.status(200).json(client.items.get(fixedName));
 });

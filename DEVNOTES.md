@@ -4,3 +4,4 @@
 - Started making dev notes (will probably forget to update!)
 - Fixed eval commands
 - Fixed perm levels
+- Fixed the API retuning "null" and a error
