@@ -7,7 +7,6 @@ module.exports = {
         const command = interaction.client.commands.get(interaction.commandName);
         const level = permlevel(interaction);
         if (!command) return;
-
         if (level < command.permLevel) {
           return await interaction.reply({
             content: `This command can only be used by level ${command.permLevel} users.`,
