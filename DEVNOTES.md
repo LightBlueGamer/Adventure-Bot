@@ -16,3 +16,4 @@
 -   -   Werewolf
 -   -   Zombie
 -   Added new drops
+-   Added new loot items
