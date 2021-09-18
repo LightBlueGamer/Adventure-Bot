@@ -1,12 +1,10 @@
 node_modules
-src/bot/config.json
-src/bot/.env
-docs/docs.json
 data/
-jsdoc.js
 .env
 apidoc.json
 logs/
 config.json
 .replit
 replit.nix
+permissions.json
+config.js
