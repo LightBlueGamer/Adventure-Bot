@@ -9,7 +9,10 @@ module.exports = class Goblin extends Monster {
             stats: {
                 health: 50,
             },
-            loot: [{ name: "Gold Coin", weight: 3000, amount: { min: 1, max: 3 } }],
+            loot: [
+                { name: "Gold Coin", weight: 3000, amount: { min: 1, max: 3 } },
+                { name: "Gold Ring", weight: 100, amount: 1 },
+            ],
             exp: { min: 1.5, max: 2.5 },
         });
     }

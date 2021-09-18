@@ -11,3 +11,8 @@
 -   A profile will now be generated whenever someone sends a message or runs a interaction
 -   Fixed API for monsters
 -   Added "permlevel" command for user context menu
+-   Added 3 new monsters
+-   -   Bandit
+-   -   Werewolf
+-   -   Zombie
+-   Added new drops
