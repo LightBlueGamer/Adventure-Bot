@@ -9,3 +9,4 @@
 -   The public API will no longer show private profiles
 -   Added "stats" slashcommand
 -   A profile will now be generated whenever someone sends a message or runs a interaction
+-   Fixed API for monsters

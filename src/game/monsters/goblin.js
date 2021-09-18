@@ -1,4 +1,4 @@
-const Monster = require("../../classes/Monster");
+const Monster = require("../classes/Monster");
 
 module.exports = class Goblin extends Monster {
     constructor() {

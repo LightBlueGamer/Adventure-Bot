@@ -4,28 +4,28 @@ const router = express.Router();
 const { client } = require("../../bot");
 
 /**
- * @api {get} /api/items Get JSON data of items
- * @apiVersion 1.1.0
- * @apiName GetItems
- * @apiGroup Items
+ * @api {get} /api/monsters Get JSON data of monsters
+ * @apiVersion 1.2.0
+ * @apiName GetMonsters
+ * @apiGroup Monsters
  * @apiError (503) ClientUnavailable The client is unavailable
- * @apiSampleRequest /api/items
- * @apiSuccess (200) {Object[]} GetItemsOk Array of objects with all items
+ * @apiSampleRequest /api/monsters
+ * @apiSuccess (200) {Object[]} getMonstersOk Array of objects with all monsters
  */
 
 router.get("/", (req, res) => {
     if (!client) return res.status(503).json({ message: "Client unavailable" });
-    return res.status(200).json([...client.items.values()]);
+    return res.status(200).json([...client.monsters.values()]);
 });
 
 /**
- * @api {get} /api/items/:name Get JSON data of a item
- * @apiVersion 1.1.0
- * @apiName GetItem
- * @apiGroup Items
+ * @api {get} /api/monsters/:name Get JSON data of a monster
+ * @apiVersion 1.2.0
+ * @apiName GetMonster
+ * @apiGroup Monsters
  * @apiError (503) ClientUnavailable The client is unavailable
- * @apiSampleRequest /api/items/name
- * @apiSuccess (200) {Object[]} GetItemOk Objects with data of the item
+ * @apiSampleRequest /api/monsters/name
+ * @apiSuccess (200) {Object[]} GetMonsterOk Objects with data of the monster
  */
 
 router.get("/:name", (req, res) => {
@@ -35,7 +35,7 @@ router.get("/:name", (req, res) => {
         .map((x) => x.replace(x[0], x[0].toUpperCase()))
         .join(" ");
     if (!client) return res.status(503).json({ message: "Client unavailable" });
-    return res.status(200).json(client.items.get(fixedName));
+    return res.status(200).json(client.monsters.get(fixedName));
 });
 
 module.exports = router;
