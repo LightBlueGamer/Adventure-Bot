@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed } = require("discord.js");
 const ms = require("pretty-ms");
 module.exports = {
-    devCmd: true,
+    devCmd: false,
     permLevel: 0,
     data: new SlashCommandBuilder()
         .setName("stats")

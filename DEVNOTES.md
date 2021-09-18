@@ -10,3 +10,4 @@
 -   Added "stats" slashcommand
 -   A profile will now be generated whenever someone sends a message or runs a interaction
 -   Fixed API for monsters
+-   Added "permlevel" command for user context menu
