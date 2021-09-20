@@ -17,3 +17,4 @@
 -   -   Zombie
 -   Added new drops
 -   Added new loot items
+-   Added "amount" key to API's that returns an array
