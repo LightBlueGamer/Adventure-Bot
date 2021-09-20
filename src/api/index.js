@@ -20,3 +20,4 @@ app.get("/apidocs", (req, res) => res.sendFile(path.resolve("", "./docs/index.ht
 app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`);
 });
+console.log(`API was successfully loaded!`)

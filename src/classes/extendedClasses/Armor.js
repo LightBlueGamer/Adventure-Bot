@@ -1,33 +1,17 @@
 const Item = require("../baseClasses/Item");
 module.exports = class Armor extends Item {
-  constructor({ options }) {
+  constructor( options ) {
     super({ options })
-    this.slot = options.slot ?? "head"
-    this.defense = options.defense ?? 1;
-    this.magicDefense = options.magicDefense ?? 0;
+    this.slot = options?.slot ?? "head"
+    this.defense = options?.defense ?? 1;
+    this.magicDefense = options?.magicDefense ?? 0;
     this.attributes = {
-      damage: options.attributes?.damage ?? 0,
-      health: options.attributes?.health ?? 0,
-      energy: options.attributes?.energy ?? 0,
-      mana: options.attributes?.mana ?? 0,
-      magic: options.attributes?.magic ?? 0
+      damage: options?.attributes?.damage ?? 0,
+      health: options?.attributes?.health ?? 0,
+      energy: options?.attributes?.energy ?? 0,
+      mana: options?.attributes?.mana ?? 0,
+      magic: options?.attributes?.magic ?? 0
     };
-  }
-
-  get slot() {
-    return this.slot;
-  }
-
-  get defense() {
-    return this.defense;
-  }
-
-  get magicDefense() {
-    return this.magicDefense;
-  }
-
-  get attributes() {
-    return this.attributes;
   }
 
   setSlot(slot) {
@@ -58,7 +42,6 @@ module.exports = class Armor extends Item {
 
   toJSON() {
     return {
-      return {
       author: this.author,
       timestamp: this.timestamp,
       name: this.name,

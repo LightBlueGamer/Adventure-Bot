@@ -1,19 +1,8 @@
-const Monster = require("../classes/Monster");
-
-module.exports = class Goblin extends Monster {
-    constructor() {
-        super({
-            name: "Goblin",
-            description:
-                "A small green creatue often scavenging around for all types of golden objects.",
-            stats: {
-                health: 50,
-            },
-            loot: [
-                { name: "Gold Coin", weight: 3000, amount: { min: 1, max: 3 } },
-                { name: "Gold Ring", weight: 100, amount: 1 },
-            ],
-            exp: { min: 1.5, max: 2.5 },
-        });
-    }
-};
+const { Monster } = require("../../classes/");
+module.exports = new Monster()
+.setName("Goblin")
+.setDescription("A small creature reminding of a troll but smaller, not much of a threat and more an annoyance.")
+.setHealth(50, 5)
+.addDrop("Gold Coin", 2500, 1, 3)
+.setExperience(1,3)
+.toJSON();
