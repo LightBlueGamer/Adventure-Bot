@@ -7,8 +7,8 @@ module.exports = class Werewolf extends Monster {
             description:
                 "A creature looking like a mix of a wolf and a man standing tall with sharp teeth to pierce it's prey",
             stats: {
-                health: 200,
-                damage: 5,
+                health: { value: 200, levelMult: 10 },
+                damage: { value: 5, levelMult: 2 },
             },
             loot: [
                 { name: "Werewolf Tooth", weight: 1000, amount: { min: 1, max: 2 } },

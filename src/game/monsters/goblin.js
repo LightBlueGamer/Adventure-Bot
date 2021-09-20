@@ -7,7 +7,7 @@ module.exports = class Goblin extends Monster {
             description:
                 "A small green creatue often scavenging around for all types of golden objects.",
             stats: {
-                health: 50,
+                health: { value: 50 }, // Uses it's default level multiplier but sets the base health to 50
             },
             loot: [
                 { name: "Gold Coin", weight: 3000, amount: { min: 1, max: 3 } },

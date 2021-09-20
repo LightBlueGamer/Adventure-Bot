@@ -20,6 +20,12 @@ module.exports = {
             });
         }
 
+        if (!interaction.inGuild())
+            return interaction.reply({
+                content: `Commands can only be used inside servers!`,
+                ephemeral: true,
+            });
+
         try {
             await command.execute(interaction);
         } catch (error) {

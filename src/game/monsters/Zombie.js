@@ -6,8 +6,9 @@ module.exports = class Zombie extends Monster {
             name: "Zombie",
             description: "A once dead creature that have came back to life as a braindead monster.",
             stats: {
-                health: 120,
-                damage: 1,
+                health: { value: 120 },
+                damage: { value: 1 },
+                // Uses the base level multiplier for both damage and health.
             },
             loot: [
                 { name: "Zombie Brain", weight: 500, amount: 1 },
