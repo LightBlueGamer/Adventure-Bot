@@ -11,11 +11,19 @@ const { client } = require("../../bot");
  * @apiError (503) ClientUnavailable The client is unavailable
  * @apiSampleRequest /api/items
  * @apiSuccess (200) {Object[]} GetItemsOk Array of objects with all items
+ * @apiExample {js} Example usage:
+ *  fetch('http://localhost:3000/api/items').then((response) => {
+ *    return response.json();
+ *  }).then((data) => {
+ *    console.log(data);
+ *  }).catch((err) => {
+ *    console.error(err);
+ *  });
  */
 
 router.get("/", (req, res) => {
     if (!client) return res.status(503).json({ message: "Client unavailable" });
-    return res.status(200).json([...client.items.values()]);
+    return res.status(200).json({amount: client.items.size, data: [...client.items.values()]});
 });
 
 /**
@@ -26,6 +34,14 @@ router.get("/", (req, res) => {
  * @apiError (503) ClientUnavailable The client is unavailable
  * @apiSampleRequest /api/items/name
  * @apiSuccess (200) {Object[]} GetItemOk Objects with data of the item
+ * @apiExample {js} Example usage:
+ *  fetch('http://localhost:3000/api/items/gold_coin').then((response) => {
+ *    return response.json();
+ *  }).then((data) => {
+ *    console.log(data);
+ *  }).catch((err) => {
+ *    console.error(err);
+ *  });
  */
 
 router.get("/:name", (req, res) => {

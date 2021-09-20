@@ -1,6 +1,5 @@
 const ms = require("pretty-ms");
 const { codeBlock } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
 const { client } = require("../");
 module.exports = {
     devCmd: true,
