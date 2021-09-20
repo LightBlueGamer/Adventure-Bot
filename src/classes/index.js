@@ -6,5 +6,6 @@ module.exports = {
 
   // ItemTypes
   Weapon: require("./extendedClasses/Weapon"),
-  Armor: require("./extendedClasses/Armor")
+  Armor: require("./extendedClasses/Armor"),
+  Shield: require("./extendedClasses/Shield")
 };
