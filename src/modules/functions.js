@@ -30,14 +30,12 @@ function setMonsterStats(monster) {
     return {
         name: monst.name,
         level: monster.level,
-        curHealth: monst.stats.health.value + (monster.level - 1) * monst.stats.health.levelMult,
-        maxHealth: monst.stats.health.value + (monster.level - 1) * monst.stats.health.levelMult,
-        defenseAbs:
-            monst.stats.defenseAbs.value + (monster.level - 1) * monst.stats.defenseAbs.levelMult,
-        magicDefenseAbs:
-            monst.stats.magicDefenseAbs.value +
-            (monster.level - 1) * monst.stats.magicDefenseAbs.levelMult,
-        damage: monst.stats.damage.value + (monster.level - 1) * monst.stats.damage.levelMult,
+        curHealth: monst.health.value + (monster.level - 1) * monst.health.multiplier,
+        maxHealth: monst.health.value + (monster.level - 1) * monst.health.multiplier,
+        defense: monst.defense.value + (monster.level - 1) * monst.defense.multiplier,
+        magicDefense:
+            monst.magicDefense.value + (monster.level - 1) * monst.magicDefense.multiplier,
+        damage: monst.damage.value + (monster.level - 1) * monst.damage.multiplier,
     };
 }
 

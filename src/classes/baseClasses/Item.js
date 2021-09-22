@@ -6,10 +6,11 @@ module.exports = class Item extends BaseClass {
         this.description = options?.description ?? "No description provided";
         this.category = options?.category ?? "misc";
         this.recipe = options?.recipe ?? null;
-        this.price = {
-            buy: options?.price?.buy ?? null,
-            sell: options?.price?.sell ?? null,
-        };
+        this.price =
+            {
+                buy: options?.price?.buy ?? null,
+                sell: options?.price?.sell ?? null,
+            } ?? null;
         this.weight = options?.weight ?? null;
     }
 

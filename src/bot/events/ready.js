@@ -1,6 +1,7 @@
-const { guildId } = require("../../../config.json");
 module.exports = {
     name: "ready",
     once: true,
-    async execute(client) {},
+    async execute(client) {
+        console.log(`${client.user.username} is ready to roll!`);
+    },
 };

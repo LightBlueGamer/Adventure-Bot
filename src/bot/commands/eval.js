@@ -1,6 +1,4 @@
-const ms = require("pretty-ms");
 const { codeBlock } = require("@discordjs/builders");
-const { client } = require("../");
 module.exports = {
     devCmd: true,
     permLevel: 10,

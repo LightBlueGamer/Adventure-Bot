@@ -7,7 +7,6 @@ module.exports = {
         type: 2,
     },
     async execute(interaction) {
-        const user = interaction.targetId;
         interaction.reply({ content: `${permlevel(interaction)}`, ephemeral: true });
     },
 };
