@@ -1,3 +1,7 @@
+### 22/09/21
+
+-   You can now attack monsters however nothing more than once and it will block
+
 ### 18/09/21
 
 -   Fixed up the README to look a lot nicer aswell as added links to references.
