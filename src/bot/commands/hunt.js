@@ -28,7 +28,7 @@ module.exports = {
                 .addOptions(options)
         );
 
-        interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+        await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
 
         const collector = interaction.channel.createMessageComponentCollector({
             filter: (inter) => inter.user.id === interaction.user.id,
@@ -46,9 +46,16 @@ module.exports = {
         let playerBlock = false;
 
         const player = interaction.client.players.get(interaction.user.id);
+        const playerMax = {
+            health: player.stats.health,
+            energy: player.stats.energy,
+            mana: player.stats.mana,
+        };
 
-        collector.on("collect", async(i) => {
-            console.log(i);
+        let monsterKilled = false,
+            playerKilled = false;
+
+        collector.on("collect", async (i) => {
             if (i.isSelectMenu()) {
                 monsterStats = setMonsterStats(monsters[i.values[0]]);
                 const embed = new MessageEmbed()
@@ -58,13 +65,8 @@ module.exports = {
                     Magic defense: ${monsterStats.magicDefense}   |   Damage: ${monsterStats.damage}`
                     )
                     .setColor(interaction.member.roles.highest.color ?? "BLURPLE");
-                 i.update({ embeds: [embed], components: [buttons] });
+                i.update({ embeds: [embed], components: [buttons] });
             } else if (i.isButton()) {
-                const playerMax = {
-                    health: player.stats.health,
-                    energy: player.stats.energy,
-                    mana: player.stats.mana,
-                };
                 const weapon = i.client.weapons.find(
                     (weapon) => weapon.name === player.equipment.weapon
                 );
@@ -77,10 +79,11 @@ module.exports = {
                         damageToDeal += weapon.damage.value * weapon.damage.critical;
                     embed.setTitle(`You attack the ${monsterStats.name}`);
                     if (monsterBlock) {
-                        const endDmg =
+                        let endDmg =
                             monsterStats.defense > damageToDeal
-                                ? monsterStats.defense - damageToDeal
-                                : damageToDeal;
+                                ? 0
+                                : damageToDeal - monsterStats.defense;
+                        endDmg = Math.round(endDmg);
                         monsterStats.curHealth -= Math.round(endDmg);
                         if (monsterStats.curHealth <= 0) {
                             embed.setDescription(
@@ -90,6 +93,7 @@ module.exports = {
                                     endDmg
                                 )} damage and kill it!`
                             );
+                            monsterKilled = true;
                         } else {
                             embed.setDescription(
                                 `The ${
@@ -105,6 +109,7 @@ module.exports = {
                                     damageToDeal
                                 )} damage and kill it!`
                             );
+                            monsterKilled = true;
                         } else {
                             embed.setDescription(
                                 `You hit the ${monsterStats.name} and deal ${parseInt(
@@ -114,13 +119,13 @@ module.exports = {
                         }
                     }
                 } else if (i.customId === "block") {
-                  if(player.equipment.shield === null) { 
-                    embed.setDescription(`You can't block without a shield.`);
-                    return i.update({ embeds: [embed], components: [buttons] });
-                  } else {
-                    playerBlock = true;
-                    embed.setDescription(`You prepare to block an incoming attack`)
-                  }
+                    if (player.equipment.shield === null) {
+                        embed.setDescription(`You can't block without a shield.`);
+                        return i.update({ embeds: [embed], components: [buttons] });
+                    } else {
+                        playerBlock = true;
+                        embed.setDescription(`You prepare to block an incoming attack`);
+                    }
                 } else if (i.customId === "flee") {
                 }
                 embed.addFields([
@@ -148,53 +153,101 @@ module.exports = {
                     },
                 ]);
                 buttons.components.forEach((button) => button.setDisabled());
-                i.update({ embeds: [embed], components: [buttons] });
+                i.update({ components: [buttons] });
+                interaction.followUp({ embeds: [embed], ephemeral: true });
                 monsterTurn(i);
             }
         });
-        function monsterTurn(i) {
-              const embed = new MessageEmbed().setColor(
-                    i.member.roles.highest.color ?? "BLURPLE"
-                );
-                const arr = [
-                    "attack",
-                    "attack",
-                    "attack",
-                    "block",
-                    "block",
-                    "block",
-                    "block",
-                    "block",
-                ];
-                const selection = arr[Math.floor(Math.random() * arr.length)];
+        async function monsterTurn(i) {
+            const embed = new MessageEmbed().setColor(i.member.roles.highest.color ?? "BLURPLE");
+            const arr = ["attack", "attack", "attack", "attack", "block", "block"];
+            const selection = arr[Math.floor(Math.random() * arr.length)];
 
-                if (selection === "attack") {
-                    embed.setTitle(`The ${monsterStats.name} attacks`)
-                    arr.splice(arr.indexOf("attack"), 1);
-                    arr.push("block");
-                    let damage = monsterStats.damage;
-                    if(playerBlock) {
-                      const shield = client.shields.get(player.equipment.shield);
-                      if(Math.round(Math.random() * (100-0) + 0) <= shield.blockChance) {
-                        if(shield.defenseAbsolute < damage) damage -= shield.defenseAbsolute;
+            if (selection === "attack") {
+                embed.setTitle(`The ${monsterStats.name} attacks`);
+                arr.splice(arr.indexOf("attack"), 1);
+                arr.push("block");
+                let damage = monsterStats.damage;
+                if (playerBlock) {
+                    const shield = interaction.client.shields.get(player.equipment.shield);
+                    if (Math.round(Math.random() * (100 - 0) + 0) <= shield.blockChance) {
+                        if (shield.defenseAbsolute < damage) damage -= shield.defenseAbsolute;
                         else damage = 0;
-                        if(player.health <= 0) return embed.setDescription(`The ${monsterStats.name} attacks you, you attempt to block but it isnt enough and you die.`)
-                        else embed.setDescription(`The ${monsterStats.name} attacks you, you block and only take ${damage} damage!`)
-                      } else {
-                        if(player.health <= 0) return embed.setDescription(`The ${monsterStats.name} attacks you, you attempt to block but fials and take ${damage} damage and die.`)
-                        else embed.setDescription(`The ${monsterStats.name} attacks you, you attempt to block but fails and take ${damage} damage.`)
-                      }
+                        damage = Math.round(damage);
+                        if (player.health <= 0) {
+                            embed.setDescription(
+                                `The ${monsterStats.name} attacks you, you attempt to block but it isnt enough and you die.`
+                            );
+                            playerKilled = true;
+                        } else
+                            embed.setDescription(
+                                `The ${monsterStats.name} attacks you, you block and only take ${damage} damage!`
+                            );
                     } else {
-                      if(player.health <= 0) return embed.setDescription(`The ${monsterStats.name} attacks you and deals ${damage} damage that kills you.`)
-                      else embed.setDescription(`The ${monsterStats.name} attacks you and deals ${damage} to you.`)
+                        damage = Math.round(damage);
+                        if (player.health <= 0) {
+                            embed.setDescription(
+                                `The ${monsterStats.name} attacks you, you attempt to block but fials and take ${damage} damage and die.`
+                            );
+                            playerKilled = true;
+                        } else
+                            embed.setDescription(
+                                `The ${monsterStats.name} attacks you, you attempt to block but fails and take ${damage} damage.`
+                            );
                     }
-                } else if (selection === "block") {
-                    arr.splice(arr.indexOf("block"), 1);
-                    arr.push("attack");
-                    monsterBlock = true;
+                } else {
+                    damage = Math.round(damage);
+                    if (player.health <= 0) {
+                        embed.setDescription(
+                            `The ${monsterStats.name} attacks you and deals ${damage} damage that kills you.`
+                        );
+                        playerKilled = true;
+                    } else
+                        embed.setDescription(
+                            `The ${monsterStats.name} attacks you and deals ${damage} to you.`
+                        );
                 }
-                buttons.components.forEach((button) => button.setDisabled(false));
-                i.update({ embeds: [embed], components: [buttons] })
+                interaction.client.players.math(
+                    interaction.user.id,
+                    "-",
+                    parseInt(damage),
+                    "stats.health"
+                );
+            } else if (selection === "block") {
+                arr.splice(arr.indexOf("block"), 1);
+                arr.push("attack");
+                monsterBlock = true;
+                embed.setTitle(`The ${monsterStats.name} prepares to block`);
             }
+            embed.addFields([
+                {
+                    name: "Player HP",
+                    value: `${interaction.client.players.get(
+                        interaction.user.id,
+                        "stats.health"
+                    )}/${playerMax.health}`,
+                    inline: true,
+                },
+                {
+                    name: "Player Energy",
+                    value: `${player.stats.energy}/${playerMax.energy}`,
+                    inline: true,
+                },
+                {
+                    name: "Player Mana",
+                    value: `${player.stats.mana}/${playerMax.mana}`,
+                    inline: true,
+                },
+                {
+                    name: "Monster HP",
+                    value: `${monsterStats.curHealth < 0 ? "0" : monsterStats.curHealth}/${
+                        monsterStats.maxHealth
+                    }`,
+                    inline: true,
+                },
+            ]);
+            buttons.components.forEach((button) => button.setDisabled(false));
+            interaction.followUp({ embeds: [embed], components: [buttons], ephemeral: true });
+        }
     },
 };
