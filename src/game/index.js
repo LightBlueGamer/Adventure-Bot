@@ -6,6 +6,7 @@ client.monsters = new Collection();
 client.items = new Collection();
 client.weapons = new Collection();
 client.armors = new Collection();
+client.shields = new Collection();
 
 console.log("-".repeat(10));
 

@@ -32,7 +32,6 @@ module.exports = {
 
         const collector = interaction.channel.createMessageComponentCollector({
             filter: (inter) => inter.user.id === interaction.user.id,
-            time: 1000 * 60 * 2 + 1000 * 30,
         });
 
         let monsterStats;
@@ -43,12 +42,13 @@ module.exports = {
             new MessageButton().setCustomId("flee").setLabel("Flee").setStyle("DANGER")
         );
 
-        const monsterChoose = {
-            attack: false,
-            block: false,
-        };
+        let monsterBlock = false;
+        let playerBlock = false;
 
-        collector.on("collect", (i) => {
+        const player = interaction.client.players.get(interaction.user.id);
+
+        collector.on("collect", async(i) => {
+            console.log(i);
             if (i.isSelectMenu()) {
                 monsterStats = setMonsterStats(monsters[i.values[0]]);
                 const embed = new MessageEmbed()
@@ -58,15 +58,13 @@ module.exports = {
                     Magic defense: ${monsterStats.magicDefense}   |   Damage: ${monsterStats.damage}`
                     )
                     .setColor(interaction.member.roles.highest.color ?? "BLURPLE");
-                i.update({ embeds: [embed], components: [buttons] });
+                 i.update({ embeds: [embed], components: [buttons] });
             } else if (i.isButton()) {
-                const player = i.client.players.get(i.user.id);
                 const playerMax = {
                     health: player.stats.health,
                     energy: player.stats.energy,
                     mana: player.stats.mana,
                 };
-                let playerBlock = false;
                 const weapon = i.client.weapons.find(
                     (weapon) => weapon.name === player.equipment.weapon
                 );
@@ -78,7 +76,7 @@ module.exports = {
                     if (Math.floor(Math.random() * (100 - 0) + 0) <= 10)
                         damageToDeal += weapon.damage.value * weapon.damage.critical;
                     embed.setTitle(`You attack the ${monsterStats.name}`);
-                    if (monsterChoose.block) {
+                    if (monsterBlock) {
                         const endDmg =
                             monsterStats.defense > damageToDeal
                                 ? monsterStats.defense - damageToDeal
@@ -116,6 +114,13 @@ module.exports = {
                         }
                     }
                 } else if (i.customId === "block") {
+                  if(player.equipment.shield === null) { 
+                    embed.setDescription(`You can't block without a shield.`);
+                    return i.update({ embeds: [embed], components: [buttons] });
+                  } else {
+                    playerBlock = true;
+                    embed.setDescription(`You prepare to block an incoming attack`)
+                  }
                 } else if (i.customId === "flee") {
                 }
                 embed.addFields([
@@ -144,10 +149,13 @@ module.exports = {
                 ]);
                 buttons.components.forEach((button) => button.setDisabled());
                 i.update({ embeds: [embed], components: [buttons] });
-                monsterTurn();
+                monsterTurn(i);
             }
-
-            async function monsterTurn() {
+        });
+        function monsterTurn(i) {
+              const embed = new MessageEmbed().setColor(
+                    i.member.roles.highest.color ?? "BLURPLE"
+                );
                 const arr = [
                     "attack",
                     "attack",
@@ -161,13 +169,32 @@ module.exports = {
                 const selection = arr[Math.floor(Math.random() * arr.length)];
 
                 if (selection === "attack") {
+                    embed.setTitle(`The ${monsterStats.name} attacks`)
                     arr.splice(arr.indexOf("attack"), 1);
                     arr.push("block");
+                    let damage = monsterStats.damage;
+                    if(playerBlock) {
+                      const shield = client.shields.get(player.equipment.shield);
+                      if(Math.round(Math.random() * (100-0) + 0) <= shield.blockChance) {
+                        if(shield.defenseAbsolute < damage) damage -= shield.defenseAbsolute;
+                        else damage = 0;
+                        if(player.health <= 0) return embed.setDescription(`The ${monsterStats.name} attacks you, you attempt to block but it isnt enough and you die.`)
+                        else embed.setDescription(`The ${monsterStats.name} attacks you, you block and only take ${damage} damage!`)
+                      } else {
+                        if(player.health <= 0) return embed.setDescription(`The ${monsterStats.name} attacks you, you attempt to block but fials and take ${damage} damage and die.`)
+                        else embed.setDescription(`The ${monsterStats.name} attacks you, you attempt to block but fails and take ${damage} damage.`)
+                      }
+                    } else {
+                      if(player.health <= 0) return embed.setDescription(`The ${monsterStats.name} attacks you and deals ${damage} damage that kills you.`)
+                      else embed.setDescription(`The ${monsterStats.name} attacks you and deals ${damage} to you.`)
+                    }
                 } else if (selection === "block") {
                     arr.splice(arr.indexOf("block"), 1);
                     arr.push("attack");
+                    monsterBlock = true;
                 }
+                buttons.components.forEach((button) => button.setDisabled(false));
+                i.update({ embeds: [embed], components: [buttons] })
             }
-        });
     },
 };
