@@ -23,4 +23,4 @@ ${client.items.map((x) => `Loaded Item: ${x.name}`).join("\n")}\n`;
 endString += "⸻".repeat(5);
 endString += `\nEverything Loaded Fine!`;
 
-appendFileSync(path.resolve("logs", "latest.txt"), endString);
+appendFileSync(path.resolve(__dirname+"logs", "latest.txt"), endString);
