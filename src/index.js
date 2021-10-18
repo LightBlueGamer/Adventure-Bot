@@ -1,6 +1,6 @@
 const { appendFileSync, truncateSync } = require("fs");
 const path = require("path");
-truncateSync(path.resolve("logs", "latest.txt"));
+truncateSync(path.resolve(__dirname+"logs", "latest.txt"));
 let endString = "";
 endString += "Loading API...\n";
 require("./api");
