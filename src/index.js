@@ -1,6 +1,6 @@
 const { appendFileSync, truncateSync } = require("fs");
 const path = require("path");
-truncateSync(path.resolve(__dirname+"/logs", "latest.txt"));
+truncateSync(path.resolve("logs", "latest.txt"));
 let endString = "";
 endString += "Loading API...\n";
 require("./api");
@@ -13,7 +13,7 @@ const { client } = require("./bot");
 endString += "⸻".repeat(5);
 
 endString += `\nLoading Commands...
-${client.commands.map((x) => `Loaded Command: ${x.data.name}`)}\n
+${client.commands.map((x) => `Loaded Command: ${x.data.name}`).join("\n")}\n
 Loading Events...
 ${client.events.map((x) => `Loaded Event: ${x.name}`).join("\n")}\n
 Loading Classes...
@@ -23,4 +23,4 @@ ${client.items.map((x) => `Loaded Item: ${x.name}`).join("\n")}\n`;
 endString += "⸻".repeat(5);
 endString += `\nEverything Loaded Fine!`;
 
-appendFileSync(path.resolve(__dirname+"/logs", "latest.txt"), endString);
+appendFileSync(path.resolve("logs", "latest.txt"), endString);
